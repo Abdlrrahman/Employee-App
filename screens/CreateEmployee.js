@@ -14,6 +14,7 @@ export default function CreateEmployee() {
     return (
         <View style={styles.root}>
             <TextInput style={styles.inputStyle} label='Name' value={Name} mode="outlined" theme={theme} onChangeText={text => setName(text)} />
+            <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />
         </View>
     )
 }
