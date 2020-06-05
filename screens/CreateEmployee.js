@@ -29,7 +29,7 @@ export default function CreateEmployee() {
                         <Button icon="image-area" mode="contained" theme={theme} onPress={() => setModal(false)}>
                             gallery
                         </Button>
-                        <Button icon="camera" mode="contained" onPress={() => setModal(false)}>
+                        <Button icon="camera" mode="contained" theme={theme} onPress={() => setModal(false)}>
                             camera
                         </Button>
                     </View>
