@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Model } from 'react-native';
+import { StyleSheet, View, Modal } from 'react-native';
 import { TextInput, Button } from 'react-native-paper'
 
 
@@ -9,7 +9,7 @@ export default function CreateEmployee() {
     const [Email, setEmail] = useState("")
     const [Salary, setSalary] = useState("")
     const [Picture, setPicture] = useState("")
-    const [Model, setModel] = useState(false)
+    const [modal, setModal] = useState(false)
 
     return (
         <View style={styles.root}>
@@ -17,9 +17,16 @@ export default function CreateEmployee() {
             <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />
             <TextInput style={styles.inputStyle} label='Email' value={Email} mode="outlined" theme={theme} onChangeText={text => setEmail(text)} />
             <TextInput style={styles.inputStyle} label='Salary' value={Salary} mode="outlined" theme={theme} onChangeText={text => setSalary(text)} />
-            <Button icon="camera" mode="contained" onPress={() => setModel(true)}>
+            <Button icon="camera" mode="contained" onPress={() => setModal(true)}>
                 Press me
             </Button>
+            <Modal animationType="slide" transparent={false} visible={modal}>
+                <View>
+                    <Button icon="camera" mode="contained" onPress={() => setModal(false)}>
+                        Cancel
+            </Button>
+                </View>
+            </Modal>
         </View>
     )
 }
