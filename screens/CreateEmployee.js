@@ -17,14 +17,22 @@ export default function CreateEmployee() {
             <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />
             <TextInput style={styles.inputStyle} label='Email' value={Email} mode="outlined" theme={theme} onChangeText={text => setEmail(text)} />
             <TextInput style={styles.inputStyle} label='Salary' value={Salary} mode="outlined" theme={theme} onChangeText={text => setSalary(text)} />
-            <Button icon="camera" mode="contained" onPress={() => setModal(true)}>
-                Press me
+            <Button icon="upload" mode="contained" onPress={() => setModal(true)}>
+                Upload Image
             </Button>
             <Modal animationType="slide" transparent={false} visible={modal}>
                 <View>
-                    <Button icon="camera" mode="contained" onPress={() => setModal(false)}>
+                    <View style={styles.modalButtonView}>
+                        <Button icon="camera" mode="contained" onPress={() => setModal(false)}>
+                            Cancel
+                    </Button>
+                        <Button icon="camera" mode="contained" onPress={() => setModal(false)}>
+                            Cancel
+                    </Button>
+                    </View>
+                    <Button icon="camera" onPress={() => setModal(false)}>
                         Cancel
-            </Button>
+                    </Button>
                 </View>
             </Modal>
         </View>
@@ -42,5 +50,10 @@ const styles = StyleSheet.create({
     },
     inputStyle: {
         margin: 5,
+    },
+    modalButtonView: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        padding: 10,
     }
 });
