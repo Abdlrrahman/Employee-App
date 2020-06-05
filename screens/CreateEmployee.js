@@ -17,20 +17,23 @@ export default function CreateEmployee() {
             <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />
             <TextInput style={styles.inputStyle} label='Email' value={Email} mode="outlined" theme={theme} onChangeText={text => setEmail(text)} />
             <TextInput style={styles.inputStyle} label='Salary' value={Salary} mode="outlined" theme={theme} onChangeText={text => setSalary(text)} />
-            <Button icon="upload" mode="contained" onPress={() => setModal(true)}>
+            <Button style={styles.inputStyle} icon="upload" mode="contained" theme={theme} onPress={() => setModal(true)}>
                 Upload Image
             </Button>
-            <Modal animationType="slide" transparent={false} visible={modal}>
-                <View>
+            <Button icon="content-save" theme={theme} onPress={() => console.log("Saved")}>
+                Save
+            </Button>
+            <Modal animationType="slide" transparent={true} visible={modal}>
+                <View style={styles.modalView}>
                     <View style={styles.modalButtonView}>
+                        <Button icon="image-area" mode="contained" theme={theme} onPress={() => setModal(false)}>
+                            gallery
+                        </Button>
                         <Button icon="camera" mode="contained" onPress={() => setModal(false)}>
-                            Cancel
-                    </Button>
-                        <Button icon="camera" mode="contained" onPress={() => setModal(false)}>
-                            Cancel
-                    </Button>
+                            camera
+                        </Button>
                     </View>
-                    <Button icon="camera" onPress={() => setModal(false)}>
+                    <Button icon="camera" theme={theme} onPress={() => setModal(false)}>
                         Cancel
                     </Button>
                 </View>
@@ -55,5 +58,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         padding: 10,
+    },
+    modalView: {
+        position: "absolute",
+        bottom: 2,
+        width: "100%",
+        backgroundColor: "white"
     }
 });
