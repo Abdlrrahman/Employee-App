@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Title, Card } from 'react-native-paper';
+import { Title, Card, Button } from 'react-native-paper';
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
 
@@ -18,24 +18,35 @@ export default function Profile() {
             </View>
             <Card style={styles.myCard}>
                 <View style={styles.cardContent}>
-                    <MaterialIcons name="email" size={32} color="skyblue" />
+                    <MaterialIcons name="email" size={32} color="#006aff" />
                     <Text style={styles.myText}>Abc@abc.com</Text>
                 </View>
             </Card>
             <Card style={styles.myCard}>
                 <View style={styles.cardContent}>
-                    <Entypo name="phone" size={32} color="skyblue" />
+                    <Entypo name="phone" size={32} color="#006aff" />
                     <Text style={styles.myText}>1234567890</Text>
                 </View>
             </Card>
             <Card style={styles.myCard}>
                 <View style={styles.cardContent}>
-                    <MaterialIcons name="attach-money" size={32} color="skyblue" />
+                    <MaterialIcons name="attach-money" size={32} color="#006aff" />
                     <Text style={styles.myText}>1000</Text>
                 </View>
             </Card>
+            <View style={{ flexDirection: "row", justifyContent: "space-around", padding: 15 }}>
+                <Button icon="account-edit" mode="contained" theme={theme} onPress={() => console.log('Pressed')}>
+                    Edit
+                </Button>
+            </View>
         </View>
     );
+}
+
+const theme = {
+    colors: {
+        primary: "#006aff"
+    }
 }
 
 const styles = StyleSheet.create({
