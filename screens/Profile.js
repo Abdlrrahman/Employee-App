@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     },
     center: {
         alignItems: "center",
+        margin: 3,
     },
     myCard: {
         margin: 3,
