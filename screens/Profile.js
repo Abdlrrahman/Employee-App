@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Title, Card } from 'react-native-paper';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
 
 export default function Profile() {
@@ -14,11 +14,17 @@ export default function Profile() {
             </View>
             <View style={styles.center}>
                 <Title>Nick Cage</Title>
-                <Text style={styles.myText}>web dev</Text>
+                <Text style={{ fontSize: 15 }}>web dev</Text>
             </View>
             <Card style={styles.myCard}>
                 <View style={styles.cardContent}>
                     <MaterialIcons name="email" size={32} color="skyblue" />
+                    <Text style={styles.myText}>Abc@abc.com</Text>
+                </View>
+            </Card>
+            <Card style={styles.myCard}>
+                <View style={styles.cardContent}>
+                    <Entypo name="phone" size={32} color="skyblue" />
                     <Text style={styles.myText}>Abc@abc.com</Text>
                 </View>
             </Card>
@@ -41,5 +47,7 @@ const styles = StyleSheet.create({
     },
     myText: {
         fontSize: 18,
+        marginTop: 3,
+        marginLeft: 3,
     },
 });
