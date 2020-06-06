@@ -25,7 +25,13 @@ export default function Profile() {
             <Card style={styles.myCard}>
                 <View style={styles.cardContent}>
                     <Entypo name="phone" size={32} color="skyblue" />
-                    <Text style={styles.myText}>Abc@abc.com</Text>
+                    <Text style={styles.myText}>1234567890</Text>
+                </View>
+            </Card>
+            <Card style={styles.myCard}>
+                <View style={styles.cardContent}>
+                    <MaterialIcons name="attach-money" size={32} color="skyblue" />
+                    <Text style={styles.myText}>1000</Text>
                 </View>
             </Card>
         </View>
