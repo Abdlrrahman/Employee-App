@@ -38,6 +38,9 @@ export default function Profile() {
                 <Button icon="account-edit" mode="contained" theme={theme} onPress={() => console.log('Pressed')}>
                     Edit
                 </Button>
+                <Button icon="delete" mode="contained" theme={theme} onPress={() => console.log('Pressed')}>
+                    Fire Employee
+                </Button>
             </View>
         </View>
     );
