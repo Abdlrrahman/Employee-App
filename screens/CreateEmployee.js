@@ -3,7 +3,10 @@ import { StyleSheet, View, Modal, Alert } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-import env from '.env'
+
+let api = process.env.api;
+let cloud_name = process.env.cloud_name;
+let upload_preset = process.env.upload_preset;
 
 
 export default function CreateEmployee() {
@@ -62,14 +65,14 @@ export default function CreateEmployee() {
     const handleUpload = (image) => {
         const data = new FormData()
         data.append("file", image)
-        data.append("upload_preset", env.upload_preset)
-        data.append("cloud_name", env.cloud_name)
+        data.append("upload_preset", upload_preset)
+        data.append("cloud_name", cloud_name)
 
-        fetch(env.api, {
+        fetch(api, {
             method: "post",
             body: data
         }).then(res => res.json())
-        then(data => { console.log(data) })
+            .then(data => { console.log(data) })
     }
 
     return (
