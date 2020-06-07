@@ -3,16 +3,12 @@ import { StyleSheet, Text, Image, View, FlatList } from 'react-native';
 import { Card, FAB } from 'react-native-paper'
 
 
-export default function Home() {
+export default function Home(props) {
     const data = [
         { id: 1, name: "one", position: "web dev" },
         { id: 2, name: "two", position: "back-end dev" },
         { id: 3, name: "three", position: "devOps dev" },
         { id: 4, name: "four", position: "front-end dev" },
-        { id: 5, name: "one", position: "web dev" },
-        { id: 6, name: "two", position: "back-end dev" },
-        { id: 7, name: "three", position: "devOps dev" },
-        { id: 8, name: "four", position: "front-end dev" },
     ]
     const renderList = ((item) => {
         return (
@@ -34,20 +30,23 @@ export default function Home() {
         )
     })
     return (
-        <View>
+        <View style={styles.root}>
             <FlatList data={data} renderItem={({ item }) => { return renderList(item) }} keyExtractor={(item) => `${item.id}`} />
             <FAB
                 style={styles.fab}
                 small={false}
                 icon="plus"
                 theme={{ colors: { accent: "#006aff" } }}
-                onPress={() => console.log('Pressed')}
+                onPress={() => props.navigation.navigate("CreateEmployee")}
             />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    root: {
+        flex: 1,
+    },
     myCard: {
         margin: 5,
     },
