@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Image, Text, Linking, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Title, Card, Button } from 'react-native-paper';
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
@@ -16,7 +16,7 @@ export default function Profile() {
                 <Title>Nick Cage</Title>
                 <Text style={{ fontSize: 15 }}>web dev</Text>
             </View>
-            <Card style={styles.myCard}>
+            <Card style={styles.myCard} onPress={() => { Linking.openURL("mailto:abc@abc.com") }}>
                 <View style={styles.cardContent}>
                     <MaterialIcons name="email" size={32} color="#006aff" />
                     <Text style={styles.myText}>Abc@abc.com</Text>
