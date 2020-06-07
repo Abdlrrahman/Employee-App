@@ -24,7 +24,14 @@ export default function CreateEmployee() {
                 aspect: [1, 1],
                 quality: 0.5,
             })
-            console.log(data);
+            if (!data.cancelled) {
+                let newFile = {
+                    uri: data.uri,
+                    type: `test/${data.uri.split("."[1])}`,
+                    name: `test.${data.uri.split("."[1])}`
+                }
+                handleUpload(newFile)
+            }
         } else {
             Alert.alert("Permission needed")
         }
@@ -40,7 +47,11 @@ export default function CreateEmployee() {
                 quality: 0.5,
             })
             if (!data.cancelled) {
-                let newFile = { uri: data.uri, type: `test/${data.uri.split("."[1])}`, name: `test.${data.uri.split("."[1])}` }
+                let newFile = {
+                    uri: data.uri,
+                    type: `test/${data.uri.split("."[1])}`,
+                    name: `test.${data.uri.split("."[1])}`
+                }
                 handleUpload(newFile)
             }
         } else {
