@@ -6,6 +6,13 @@ import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
 
 export default function Profile() {
+    const openDial = () => {
+        if (Platform.OS === "android") {
+            Linking.openURL("tel:12345")
+        } else {
+            Linking.openURL("telprompt:123456")
+        }
+    }
     return (
         <View style={styles.root}>
             <LinearGradient colors={["#0033ff", "#6bc1ff"]} style={{ height: "20%" }} />
@@ -22,7 +29,7 @@ export default function Profile() {
                     <Text style={styles.myText}>Abc@abc.com</Text>
                 </View>
             </Card>
-            <Card style={styles.myCard}>
+            <Card style={styles.myCard} onPress={() => { openDial("Abc@abc.com") }}>
                 <View style={styles.cardContent}>
                     <Entypo name="phone" size={32} color="#006aff" />
                     <Text style={styles.myText}>1234567890</Text>
