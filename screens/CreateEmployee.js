@@ -14,6 +14,21 @@ export default function CreateEmployee() {
     const [Picture, setPicture] = useState("")
     const [modal, setModal] = useState(false)
 
+    const pickFromGallery = async () => {
+        const { granted } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+        if (granted) {
+            let data = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 0.5,
+            })
+            console.log(data);
+        } else {
+            Alert.alert("Permission needed")
+        }
+    }
+
     const pickFromCamera = async () => {
         const { granted } = await Permissions.askAsync(Permissions.CAMERA)
         if (granted) {
@@ -44,7 +59,7 @@ export default function CreateEmployee() {
             <Modal animationType="slide" transparent={true} visible={modal}>
                 <View style={styles.modalView}>
                     <View style={styles.modalButtonView}>
-                        <Button icon="image-area" mode="contained" theme={theme} onPress={() => setModal(false)}>
+                        <Button icon="image-area" mode="contained" theme={theme} onPress={() => pickFromGallery()}>
                             gallery
                         </Button>
                         <Button icon="camera" mode="contained" theme={theme} onPress={() => pickFromCamera()}>
