@@ -14,13 +14,20 @@ export default function App() {
     <NavigationContainer>
       <View style={styles.container}>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="CreateEmployee" component={CreateEmployee} />
-          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Home" component={Home} options={myOptions} />
+          <Stack.Screen name="CreateEmployee" component={CreateEmployee} options={{ ...myOptions, title: "Create Employee" }} />
+          <Stack.Screen name="Profile" component={Profile} options={myOptions} />
         </Stack.Navigator>
       </View>
     </NavigationContainer>
   );
+}
+
+const myOptions = {
+  headerTintColor: "white",
+  headerStyle: {
+    backgroundColor: "#006aff"
+  }
 }
 
 const styles = StyleSheet.create({
