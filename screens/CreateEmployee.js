@@ -3,6 +3,7 @@ import { StyleSheet, View, Modal, Alert } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
+import env from '.env'
 
 
 export default function CreateEmployee() {
@@ -45,6 +46,19 @@ export default function CreateEmployee() {
         } else {
             Alert.alert("Permission needed")
         }
+    }
+
+    const handleUpload = (image) => {
+        const data = new FormData()
+        data.append("file", image)
+        data.append("upload_preset", env.upload_preset)
+        data.append("cloud_name", env.cloud_name)
+
+        fetch(env.api, {
+            method: "post",
+            body: data
+        }).then(res => res.json())
+        then(data => { console.log(data) })
     }
 
     return (
