@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Modal } from 'react-native';
-import { TextInput, Button } from 'react-native-paper'
+import { StyleSheet, View, Modal, Alert } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
 
 
 export default function CreateEmployee() {
+
     const [Name, setName] = useState("")
     const [Phone, setPhone] = useState("")
     const [Email, setEmail] = useState("")
     const [Salary, setSalary] = useState("")
     const [Picture, setPicture] = useState("")
     const [modal, setModal] = useState(false)
+
+    const pickFromCamera = async () => {
+        const { granted } = await Permissions.askAsync(Permissions.CAMERA)
+        if (granted) {
+            let data = await ImagePicker.launchCameraAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 0.5,
+            })
+            console.log(data);
+        } else {
+            Alert.alert("Permission needed")
+        }
+    }
 
     return (
         <View style={styles.root}>
@@ -29,7 +47,7 @@ export default function CreateEmployee() {
                         <Button icon="image-area" mode="contained" theme={theme} onPress={() => setModal(false)}>
                             gallery
                         </Button>
-                        <Button icon="camera" mode="contained" theme={theme} onPress={() => setModal(false)}>
+                        <Button icon="camera" mode="contained" theme={theme} onPress={() => pickFromCamera()}>
                             camera
                         </Button>
                     </View>
