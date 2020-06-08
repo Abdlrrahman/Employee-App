@@ -5,9 +5,9 @@ import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 
 
-let API = process.env.API;
-let cloud_name = process.env.CLOUD_NAME;
-let upload_preset = process.env.UPLOAD_PRESET;
+const API = process.env.API;
+const cloud_name = process.env.CLOUD_NAME;
+const upload_preset = process.env.UPLOAD_PRESET;
 
 
 export default function CreateEmployee() {
@@ -72,7 +72,7 @@ export default function CreateEmployee() {
         fetch(API, {
             method: "POST",
             body: data,
-        }).then(res => res.json())
+        }).then(res => console.log(res.json()))
             .then(data => { console.log(data) })
             .catch(function (error) {
                 console.log('There has been a problem with your fetch operation: ' + error);
