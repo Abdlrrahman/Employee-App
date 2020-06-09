@@ -68,11 +68,12 @@ export default function CreateEmployee() {
         data.append("file", image)
         data.append("upload_preset", upload_preset)
         data.append("cloud_name", cloud_name)
+        console.log(data.)
 
         fetch(API, {
             method: "POST",
             body: data,
-        }).then(res => console.log(res.json()))
+        }).then(res => (res.json()))
             .then(data => { console.log(data) })
             .catch(function (error) {
                 console.log('There has been a problem with your fetch operation: ' + error);
