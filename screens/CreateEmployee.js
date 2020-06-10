@@ -4,9 +4,9 @@ import { TextInput, Button } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 
-let api = process.env.api;
-let cloud_name = process.env.cloud_name;
-let upload_preset = process.env.upload_preset;
+const api = process.env.API;
+const cloud_name = process.env.CLOUD_NAME;
+const upload_preset = process.env.UPLOAD_PRESET;
 
 
 export default function CreateEmployee() {
@@ -30,8 +30,8 @@ export default function CreateEmployee() {
             if (!data.cancelled) {
                 let newFile = {
                     uri: data.uri,
-                    type: `test/${data.uri.split("."[1])}`,
-                    name: `test.${data.uri.split("."[1])}`
+                    type: `test/${data.uri.split(".")[1]}`,
+                    name: `test.${data.uri.split(".")[1]}`
                 }
                 handleUpload(newFile)
             }
