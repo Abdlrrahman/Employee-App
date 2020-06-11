@@ -33,9 +33,23 @@ mongoose.connection.on("error", (error) => {
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.post('/send', (req, res) => {
-    console.log(req.body);
-    res.send('sent successfully');
+app.post('/send-data', (req, res) => {
+    const employee = new Employee({
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        picture: req.body.picture,
+        salary: req.body.salary,
+        position: req.body.position
+    })
+    employee.save()
+        .then(data => {
+            console.log(data);
+            res.send('sent successfully');
+        }).catch(error => {
+            console.log(error)
+        })
+
 });
 
 app.listen(port, () => console.log(`Listening at ${port}`));
