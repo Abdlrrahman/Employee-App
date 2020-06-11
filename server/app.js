@@ -17,7 +17,7 @@ const mongodb = `mongodb+srv://Abdo:${process.env.DB_PASSWORD}@cluster0-u4hb7.mo
 mongoose.connect(mongodb, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
     useCreateIndex: true
 
 });
