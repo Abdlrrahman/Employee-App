@@ -4,8 +4,9 @@ import { TextInput, Button } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 
+console.log(process.env)
 
-const API = process.env.API;
+const api = process.env.API;
 const cloud_name = process.env.CLOUD_NAME;
 const upload_preset = process.env.UPLOAD_PRESET;
 
@@ -70,11 +71,15 @@ export default function CreateEmployee() {
         data.append("cloud_name", cloud_name)
         console.log(data)
 
-        fetch(API, {
+        fetch(api, {
             method: "POST",
             body: data,
         }).then(res => (res.json()))
-            .then(data => { console.log(data) })
+            .then(data => {
+                console.log(data)
+                setPicture(data)
+                setModal(false)
+            })
             .catch(function (error) {
                 console.log('There has been a problem with your fetch operation: ' + error);
                 throw error;

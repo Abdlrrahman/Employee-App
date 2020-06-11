@@ -1,6 +1,10 @@
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ['babel-preset-expo']
+    presets: [['babel-preset-expo'], ["transform-inline-environment-variables", {
+      "include": [
+        "NODE_ENV"
+      ]
+    }]]
   };
 };
