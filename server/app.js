@@ -5,11 +5,13 @@ const mongoose = require('mongoose');
 const port = 3000;
 require('./models/Employee');
 
+app.use(bodyParser.json())
+
 const dotenv = require('dotenv');
 dotenv.config();
 
 const Employee = mongoose.model("employee");
-console.log(process.env.DB_PASSWORD);
+
 const mongodb = `mongodb+srv://Abdo:${process.env.DB_PASSWORD}@cluster0-u4hb7.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 mongoose.connect(mongodb, {
@@ -26,6 +28,14 @@ mongoose.connection.on("error", (error) => {
 })
 
 
+/////////////////////////////////////////////////////
+
+
 app.get('/', (req, res) => res.send('Hello World!'));
+
+app.post('/send', (req, res) => {
+    console.log(req.body);
+    res.send('sent successfully');
+});
 
 app.listen(port, () => console.log(`Listening at ${port}`));
