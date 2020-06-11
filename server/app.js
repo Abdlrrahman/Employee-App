@@ -16,7 +16,10 @@ const mongodb = `mongodb+srv://Abdo:${process.env.DB_PASSWORD}@cluster0-u4hb7.mo
 
 mongoose.connect(mongodb, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: true,
+    useCreateIndex: true
+
 });
 
 mongoose.connection.on("connected", () => {
@@ -33,22 +36,22 @@ mongoose.connection.on("error", (error) => {
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.post('/send-data', (req, res) => {
-    const employee = new Employee({
-        name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
-        picture: req.body.picture,
-        salary: req.body.salary,
-        position: req.body.position
-    })
-    employee.save()
-        .then(data => {
-            console.log(data);
-            res.send('sent successfully');
-        }).catch(error => {
-            console.log(error)
+app.post('/send-data', async (req, res) => {
+    try {
+        const employee = new Employee({
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            picture: req.body.picture,
+            salary: req.body.salary,
+            position: req.body.position
         })
+        let response = await employee.save()
+        console.log(response);
+        res.send('sent successfully');
+    } catch (error) {
+        alert(error);
+    }
 
 });
 
@@ -57,14 +60,9 @@ app.delete('/delete', async (req, res) => {
         let response = await Employee.findByIdAndRemove(req.body.id)
         console.log(response)
         res.send("deleted")
-    } catch (err) {
-        alert(err); // TypeError: failed to fetch
+    } catch (error) {
+        alert(error);
     }
-    // await Employee.findByIdAndRemove(req.body.id)
-    // console.log(data)
-    // res.send("deleted")
-    // throw new Error(error);
-
 });
 
 app.listen(port, () => console.log(`Listening at ${port}`));
