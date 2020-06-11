@@ -52,4 +52,19 @@ app.post('/send-data', (req, res) => {
 
 });
 
+app.delete('/delete', async (req, res) => {
+    try {
+        let response = await Employee.findByIdAndRemove(req.body.id)
+        console.log(response)
+        res.send("deleted")
+    } catch (err) {
+        alert(err); // TypeError: failed to fetch
+    }
+    // await Employee.findByIdAndRemove(req.body.id)
+    // console.log(data)
+    // res.send("deleted")
+    // throw new Error(error);
+
+});
+
 app.listen(port, () => console.log(`Listening at ${port}`));
