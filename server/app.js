@@ -34,7 +34,14 @@ mongoose.connection.on("error", (error) => {
 /////////////////////////////////////////////////////
 
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', async (req, res) => {
+    try {
+        let response = await Employee.find({})
+        res.send(response)
+    } catch (error) {
+        alert(error);
+    }
+});
 
 app.post('/send-data', async (req, res) => {
     try {
