@@ -64,26 +64,25 @@ export default function CreateEmployee() {
         }
     }
 
-    const handleUpload = (image) => {
-        const data = new FormData()
-        data.append("file", image)
-        data.append("upload_preset", upload_preset)
-        data.append("cloud_name", cloud_name)
-        console.log(data)
+    const handleUpload = async (image) => {
+        try {
+            const data = new FormData()
+            data.append("file", image)
+            data.append("upload_preset", upload_preset)
+            data.append("cloud_name", cloud_name)
+            console.log(data)
 
-        fetch(api, {
-            method: "POST",
-            body: data,
-        }).then(res => (res.json()))
-            .then(data => {
-                console.log(data)
-                setPicture(data)
-                setModal(false)
+            let response = await fetch(api, {
+                method: "POST",
+                body: data,
             })
-            .catch(function (error) {
-                console.log('There has been a problem with your fetch operation: ' + error);
-                throw error;
-            });
+            response = await response.json()
+            console.log(response)
+            setPicture(response)
+            setModal(false)
+        } catch (error) {
+            alert(error);
+        }
     }
 
     return (
