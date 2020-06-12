@@ -18,6 +18,7 @@ export default function CreateEmployee() {
     const [Email, setEmail] = useState("")
     const [Salary, setSalary] = useState("")
     const [Picture, setPicture] = useState("")
+    const [Position, setPosition] = useState("")
     const [modal, setModal] = useState(false)
 
     const pickFromGallery = async () => {
@@ -85,16 +86,40 @@ export default function CreateEmployee() {
         }
     }
 
+    const submitData = async () => {
+        try {
+            let response = await fetch("http://localhost:3000/send-data", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: Name,
+                    email: Email,
+                    phone: Phone,
+                    picture: Picture,
+                    salary: Salary,
+                    position: Position
+                })
+            })
+            response = await response.json()
+            console.log(response)
+        } catch (error) {
+            alert(error);
+        }
+    }
+
     return (
         <View style={styles.root}>
             <TextInput style={styles.inputStyle} label='Name' value={Name} mode="outlined" theme={theme} onChangeText={text => setName(text)} />
             <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />
             <TextInput style={styles.inputStyle} label='Email' value={Email} mode="outlined" theme={theme} onChangeText={text => setEmail(text)} />
             <TextInput style={styles.inputStyle} label='Salary' value={Salary} mode="outlined" theme={theme} onChangeText={text => setSalary(text)} />
+            <TextInput style={styles.inputStyle} label='Position' value={Position} mode="outlined" theme={theme} onChangeText={text => setPosition(text)} />
             <Button style={styles.inputStyle} icon={Picture == "" ? "upload" : "check"} mode="contained" theme={theme} onPress={() => setModal(true)}>
                 Upload Image
             </Button>
-            <Button icon="content-save" theme={theme} onPress={() => console.log("Saved")}>
+            <Button icon="content-save" theme={theme} onPress={() => submitData()}>
                 Save
             </Button>
             <Modal animationType="slide" transparent={true} visible={modal}>
