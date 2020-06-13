@@ -3,6 +3,7 @@ import { StyleSheet, View, Modal, Alert } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
 
 console.log(process.env)
 
@@ -88,7 +89,7 @@ export default function CreateEmployee() {
 
     const submitData = async () => {
         try {
-            let response = await fetch("http://localhost:3000/send-data", {
+            let response = await fetch("http://c9d7984d3db6.ngrok.io/send-data", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
