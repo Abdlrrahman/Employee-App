@@ -5,7 +5,8 @@ import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 
-console.log(process.env)
+Constants.manifest.env
+console.log(Constants.manifest)
 
 const api = process.env.API;
 const cloud_name = process.env.CLOUD_NAME;
