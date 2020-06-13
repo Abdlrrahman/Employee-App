@@ -3,18 +3,7 @@ import { StyleSheet, View, Modal, Alert } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
-import getenv from 'getenv';
-
-Constants.manifest.env
-console.log(Constants.manifest.env)
-console.log(process.env)
-// console.log(env)
-
-const api = getenv('API');
-console.log(api)
-const cloud_name = process.env.CLOUD_NAME;
-const upload_preset = process.env.UPLOAD_PRESET;
+import env from "./variables"
 
 
 export default function CreateEmployee() {
@@ -75,26 +64,27 @@ export default function CreateEmployee() {
         try {
             const data = new FormData()
             data.append("file", image)
-            data.append("upload_preset", upload_preset)
-            data.append("cloud_name", cloud_name)
+            data.append("upload_preset", env.UPLOAD_PRESET)
+            data.append("cloud_name", env.CLOUD_NAME)
             console.log(data)
 
-            let response = await fetch(api, {
+            let response = await fetch(env.API, {
                 method: "POST",
                 body: data,
             })
             response = await response.json()
             console.log(response)
-            setPicture(response)
+            setPicture(response.secure_url)
             setModal(false)
         } catch (error) {
+            console.log("handleUpload ", error)
             alert(error);
         }
     }
 
     const submitData = async () => {
         try {
-            let response = await fetch("http://c9d7984d3db6.ngrok.io/send-data", {
+            let response = await fetch(`${env.apiUrl}/send-data`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -108,9 +98,11 @@ export default function CreateEmployee() {
                     position: Position
                 })
             })
+            console.log(response)
             response = await response.json()
             console.log(response)
         } catch (error) {
+            console.log("submitData ", error)
             alert(error);
         }
     }

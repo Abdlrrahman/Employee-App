@@ -39,12 +39,13 @@ app.get('/', async (req, res) => {
         let response = await Employee.find({})
         res.send(response)
     } catch (error) {
-        alert(error);
+        console.log(error)
     }
 });
 
 app.post('/send-data', async (req, res) => {
     try {
+        console.log(req.body.picture)
         const employee = new Employee({
             name: req.body.name,
             email: req.body.email,
@@ -57,7 +58,7 @@ app.post('/send-data', async (req, res) => {
         console.log(response);
         res.send('sent successfully');
     } catch (error) {
-        alert(error);
+        console.log(error);
     }
 
 });
@@ -68,7 +69,7 @@ app.delete('/delete', async (req, res) => {
         console.log(response)
         res.send("deleted")
     } catch (error) {
-        alert(error);
+        console.log(error)
     }
 });
 
@@ -85,7 +86,7 @@ app.patch('/update', async (req, res) => {
         console.log(response)
         res.send("updated")
     } catch (error) {
-        alert(error);
+        console.log(error)
     }
 });
 
