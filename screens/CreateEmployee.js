@@ -4,11 +4,15 @@ import { TextInput, Button } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
+import getenv from 'getenv';
 
 Constants.manifest.env
-console.log(Constants.manifest)
+console.log(Constants.manifest.env)
+console.log(process.env)
+// console.log(env)
 
-const api = process.env.API;
+const api = getenv('API');
+console.log(api)
 const cloud_name = process.env.CLOUD_NAME;
 const upload_preset = process.env.UPLOAD_PRESET;
 
