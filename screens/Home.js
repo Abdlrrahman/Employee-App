@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, Image, View, FlatList } from 'react-native';
+import { StyleSheet, Text, Image, Alert, View, FlatList, ActivityIndicator } from 'react-native';
 import { Card, FAB } from 'react-native-paper';
 import env from "./variables";
 
@@ -7,24 +7,29 @@ import env from "./variables";
 export default function Home(props) {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
-    useEffect(async () => {
-        try {
-            let response = await fetch(env.apiUrl);
-            response = response.json();
-            setData.push(response);
-            setLoading(false)
-        } catch (error) {
-            console.log(error)
-            Alert.alert(error);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                let response = await fetch(`${env.apiUrl}/`);
+                response = response.json();
+                setData(response);
+                console.log(response)
+                setLoading(false)
+            } catch (error) {
+                console.log(error)
+                Alert.alert(error);
+            }
         }
+        fetchData()
     }, [])
 
     const renderList = ((item) => {
+        { console.log(item) }
         return (
-            <Card style={styles.myCard} key={item._id} onPress={() => props.navigation.navigate("Profile", { item })}>
+            <Card style={styles.myCard} onPress={() => props.navigation.navigate("Profile", { item })}>
                 <View style={styles.cardView}>
                     <Image style={{ width: 60, height: 60, borderLeftWidth: 30 }}
-                        source={{ uri: "https://images.unsplash.com/photo-1580045235733-0bc45cd279ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=429&q=80" }}
+                        source={{ uri: item.picture }}
                     />
                     <View style={{ marginLeft: 10 }}>
                         <Text style={styles.text}>
@@ -40,7 +45,11 @@ export default function Home(props) {
     })
     return (
         <View style={styles.root}>
-            <FlatList data={data} renderItem={({ item }) => { return renderList(item) }} keyExtractor={(item) => item._id} />
+            {loading ?
+                <ActivityIndicator size="large" color="#006aff" />
+                :
+                <FlatList data={data} renderItem={({ item }) => { return renderList(item) }} keyExtractor={(item) => item._id} />
+            }
             <FAB
                 style={styles.fab}
                 small={false}
