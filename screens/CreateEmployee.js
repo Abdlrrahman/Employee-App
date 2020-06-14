@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Modal, Alert } from 'react-native';
+import { StyleSheet, View, Modal, Alert, KeyboardAvoidingView } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -111,32 +111,34 @@ export default function CreateEmployee({ navigation }) {
 
     return (
         <View style={styles.root}>
-            <TextInput style={styles.inputStyle} label='Name' value={Name} mode="outlined" theme={theme} onChangeText={text => setName(text)} />
-            <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />
-            <TextInput style={styles.inputStyle} label='Email' value={Email} mode="outlined" theme={theme} onChangeText={text => setEmail(text)} />
-            <TextInput style={styles.inputStyle} label='Salary' value={Salary} mode="outlined" theme={theme} onChangeText={text => setSalary(text)} />
-            <TextInput style={styles.inputStyle} label='Position' value={Position} mode="outlined" theme={theme} onChangeText={text => setPosition(text)} />
-            <Button style={styles.inputStyle} icon={Picture == "" ? "upload" : "check"} mode="contained" theme={theme} onPress={() => setModal(true)}>
-                Upload Image
+            <KeyboardAvoidingView>
+                <TextInput style={styles.inputStyle} label='Name' value={Name} mode="outlined" theme={theme} onChangeText={text => setName(text)} />
+                <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />
+                <TextInput style={styles.inputStyle} label='Email' value={Email} mode="outlined" theme={theme} onChangeText={text => setEmail(text)} />
+                <TextInput style={styles.inputStyle} label='Salary' value={Salary} mode="outlined" theme={theme} onChangeText={text => setSalary(text)} />
+                <TextInput style={styles.inputStyle} label='Position' value={Position} mode="outlined" theme={theme} onChangeText={text => setPosition(text)} />
+                <Button style={styles.inputStyle} icon={Picture == "" ? "upload" : "check"} mode="contained" theme={theme} onPress={() => setModal(true)}>
+                    Upload Image
             </Button>
-            <Button icon="content-save" theme={theme} onPress={() => submitData()}>
-                Save
+                <Button icon="content-save" theme={theme} onPress={() => submitData()}>
+                    Save
             </Button>
-            <Modal animationType="slide" transparent={true} visible={modal}>
-                <View style={styles.modalView}>
-                    <View style={styles.modalButtonView}>
-                        <Button icon="image-area" mode="contained" theme={theme} onPress={() => pickFromGallery()}>
-                            gallery
+                <Modal animationType="slide" transparent={true} visible={modal}>
+                    <View style={styles.modalView}>
+                        <View style={styles.modalButtonView}>
+                            <Button icon="image-area" mode="contained" theme={theme} onPress={() => pickFromGallery()}>
+                                gallery
                         </Button>
-                        <Button icon="camera" mode="contained" theme={theme} onPress={() => pickFromCamera()}>
-                            camera
+                            <Button icon="camera" mode="contained" theme={theme} onPress={() => pickFromCamera()}>
+                                camera
                         </Button>
-                    </View>
-                    <Button icon="camera" theme={theme} onPress={() => setModal(false)}>
-                        Cancel
+                        </View>
+                        <Button icon="camera" theme={theme} onPress={() => setModal(false)}>
+                            Cancel
                     </Button>
-                </View>
-            </Modal>
+                    </View>
+                </Modal>
+            </KeyboardAvoidingView>
         </View>
     )
 }
