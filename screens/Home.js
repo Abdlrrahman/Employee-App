@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, Image, View, FlatList } from 'react-native';
-import { Card, FAB } from 'react-native-paper'
+import { Card, FAB } from 'react-native-paper';
+import env from "./variables";
 
 
 export default function Home(props) {
-    const data = [
-        { id: "1", name: "one", email: "abc@abc.com", salary: "1000", phone: "123456", picture: "https://images.unsplash.com/photo-1580045235733-0bc45cd279ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=429&q=80", position: "web dev" },
-        { id: "2", name: "two", email: "xyz@abc.com", salary: "2000", phone: "098765", picture: "https://images.unsplash.com/photo-1580045235733-0bc45cd279ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=429&q=80", position: "back-end dev" },
-        { id: "3", name: "three", email: "jim@abc.com", salary: "3000", phone: "123098", picture: "https://images.unsplash.com/photo-1580045235733-0bc45cd279ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=429&q=80", position: "devOps dev" },
-        { id: "4", name: "four", email: "jack@abc.com", salary: "4000", phone: "654321", picture: "https://images.unsplash.com/photo-1580045235733-0bc45cd279ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=429&q=80", position: "front-end dev" },
-    ]
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(true)
+    useEffect(async () => {
+        try {
+            let response = await fetch(env.apiUrl);
+            response = response.json();
+            setData.push(response);
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+            Alert.alert(error);
+        }
+    }, [])
+
     const renderList = ((item) => {
         return (
-            <Card style={styles.myCard} key={item.id} onPress={() => props.navigation.navigate("Profile", { item })}>
+            <Card style={styles.myCard} key={item._id} onPress={() => props.navigation.navigate("Profile", { item })}>
                 <View style={styles.cardView}>
                     <Image style={{ width: 60, height: 60, borderLeftWidth: 30 }}
                         source={{ uri: "https://images.unsplash.com/photo-1580045235733-0bc45cd279ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=429&q=80" }}
@@ -31,7 +40,7 @@ export default function Home(props) {
     })
     return (
         <View style={styles.root}>
-            <FlatList data={data} renderItem={({ item }) => { return renderList(item) }} keyExtractor={(item) => item.id} />
+            <FlatList data={data} renderItem={({ item }) => { return renderList(item) }} keyExtractor={(item) => item._id} />
             <FAB
                 style={styles.fab}
                 small={false}

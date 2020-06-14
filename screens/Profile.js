@@ -7,7 +7,7 @@ import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
 export default function Profile(props) {
 
-    const { id, name, email, picture, phone, salary, position } = props.route.params.item;
+    const { _id, name, email, picture, phone, salary, position } = props.route.params.item;
 
     const openDial = () => {
         if (Platform.OS === "android") {
