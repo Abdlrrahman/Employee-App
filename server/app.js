@@ -56,7 +56,7 @@ app.post('/send-data', async (req, res) => {
         })
         let response = await employee.save()
         console.log(response);
-        res.send('sent successfully');
+        // res.send('sent successfully');
     } catch (error) {
         console.log(error);
     }

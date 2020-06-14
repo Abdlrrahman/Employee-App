@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import env from "./variables"
 
 
-export default function CreateEmployee() {
+export default function CreateEmployee({ navigation }) {
 
     const [Name, setName] = useState("")
     const [Phone, setPhone] = useState("")
@@ -78,7 +78,7 @@ export default function CreateEmployee() {
             setModal(false)
         } catch (error) {
             console.log("handleUpload ", error)
-            alert(error);
+            Alert.alert(error);
         }
     }
 
@@ -101,9 +101,11 @@ export default function CreateEmployee() {
             console.log(response)
             response = await response.json()
             console.log(response)
+            Alert.alert(`${response.name} is saved successfully`)
+            navigation.navigate("Home")
         } catch (error) {
             console.log("submitData ", error)
-            alert(error);
+            Alert.alert(error);
         }
     }
 
