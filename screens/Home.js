@@ -12,7 +12,6 @@ export default function Home(props) {
         fetch(env.apiUrl)
             .then(res => res.json())
             .then(data =>
-                // console.log(data[0]),
                 setData(data),
                 setLoading(false)
             ).catch(err => console.log(err))
