@@ -1,13 +1,37 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text, Linking, Platform } from 'react-native';
+import { StyleSheet, View, Image, Text, Linking, Platform, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Title, Card, Button } from 'react-native-paper';
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
+import env from "./variables"
 
 
 export default function Profile(props) {
 
     const { _id, name, email, picture, phone, salary, position } = props.route.params.item;
+
+    console.log(_id);
+
+    const deleteEmploye = async () => {
+        try {
+            let response = await fetch(`${env.apiUrl}/delete`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: _id
+                })
+            })
+            response = await response.json()
+            console.log(response)
+            Alert.alert(`${response.name} is saved successfully`)
+            props.navigation.navigate("Home")
+        } catch (error) {
+            console.log(error)
+            Alert.alert("something went wrong")
+        }
+    }
 
     const openDial = () => {
         if (Platform.OS === "android") {
@@ -48,7 +72,7 @@ export default function Profile(props) {
                 <Button icon="account-edit" mode="contained" theme={theme} onPress={() => console.log('Pressed')}>
                     Edit
                 </Button>
-                <Button icon="delete" mode="contained" theme={theme} onPress={() => console.log('Pressed')}>
+                <Button icon="delete" mode="contained" theme={theme} onPress={() => deleteEmploye()}>
                     Fire Employee
                 </Button>
             </View>

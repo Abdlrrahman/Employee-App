@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Modal, Alert, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Modal, Alert } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -73,10 +73,11 @@ export default function CreateEmployee({ navigation }) {
                 body: data,
             })
             response = await response.json()
+            console.log(response)
             setPicture(response.secure_url)
             setModal(false)
         } catch (error) {
-            Alert.alert(error);
+            Alert.alert("something went wrong");
         }
     }
 
@@ -97,10 +98,11 @@ export default function CreateEmployee({ navigation }) {
                 })
             })
             response = await response.json()
+            console.log(response)
             Alert.alert(`${response.name} is saved successfully`)
             navigation.navigate("Home")
         } catch (error) {
-            Alert.alert(error)
+            Alert.alert("something went wrong")
         }
     }
 

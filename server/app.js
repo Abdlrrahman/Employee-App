@@ -38,7 +38,7 @@ app.get('/', async (req, res) => {
     try {
         let response = await Employee.find({})
         res.send(response)
-        // console.log(response)
+        console.log(response)
     } catch (error) {
         console.log(error)
     }
@@ -57,6 +57,7 @@ app.post('/send-data', async (req, res) => {
         })
         let response = await employee.save()
         console.log(response);
+        res.send(response)
         // res.send('sent successfully');
     } catch (error) {
         console.log(error);
@@ -68,7 +69,8 @@ app.delete('/delete', async (req, res) => {
     try {
         let response = await Employee.findByIdAndRemove(req.body.id)
         console.log(response)
-        res.send("deleted")
+        res.send(response)
+        // res.send("deleted")
     } catch (error) {
         console.log(error)
     }
@@ -85,7 +87,8 @@ app.patch('/update', async (req, res) => {
             position: req.body.position
         })
         console.log(response)
-        res.send("updated")
+        res.send(response)
+        // res.send("updated")
     } catch (error) {
         console.log(error)
     }
