@@ -16,8 +16,7 @@ export default function Home(props) {
                 setData(data),
                 setLoading(false)
             ).catch(err =>
-                console.log(err),
-                Alert.alert(error)
+                Alert.alert(err)
             )
     }
 
