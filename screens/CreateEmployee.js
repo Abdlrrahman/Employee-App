@@ -98,20 +98,17 @@ export default function CreateEmployee({ navigation }) {
                     position: Position
                 })
             })
-            console.log(response)
             response = await response.json()
-            console.log(response)
             Alert.alert(`${response.name} is saved successfully`)
             navigation.navigate("Home")
         } catch (error) {
             console.log("submitData ", error)
-            Alert.alert(error);
+            Alert.alert(error)
         }
     }
 
     return (
         <View style={styles.root}>
-            {/* <KeyboardAvoidingView behavior="position"> */}
             <TextInput style={styles.inputStyle} label='Name' value={Name} mode="outlined" theme={theme} onChangeText={text => setName(text)} />
             <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />
             <TextInput style={styles.inputStyle} label='Email' value={Email} mode="outlined" theme={theme} onChangeText={text => setEmail(text)} />
@@ -138,7 +135,6 @@ export default function CreateEmployee({ navigation }) {
                     </Button>
                 </View>
             </Modal>
-            {/* </KeyboardAvoidingView> */}
         </View >
     )
 }
