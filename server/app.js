@@ -38,6 +38,7 @@ app.get('/', async (req, res) => {
     try {
         let response = await Employee.find({})
         res.send(response)
+        // console.log(response)
     } catch (error) {
         console.log(error)
     }

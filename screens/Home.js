@@ -4,27 +4,22 @@ import { Card, FAB } from 'react-native-paper';
 import env from "./variables";
 
 
+
 export default function Home(props) {
-    const [data, setData] = useState([])
+    const [data, setData] = useState("")
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        async function fetchData() {
-            try {
-                let response = await fetch(`${env.apiUrl}/`);
-                response = response.json();
-                setData(response);
-                console.log(response)
+        fetch(env.apiUrl)
+            .then(res => res.json())
+            .then(data =>
+                // console.log(data[0]),
+                setData(data),
                 setLoading(false)
-            } catch (error) {
-                console.log(error)
-                Alert.alert(error);
-            }
-        }
-        fetchData()
-    }, [])
+            ).catch(err => console.log(err))
+
+    }, [data])
 
     const renderList = ((item) => {
-        { console.log(item) }
         return (
             <Card style={styles.myCard} onPress={() => props.navigation.navigate("Profile", { item })}>
                 <View style={styles.cardView}>
