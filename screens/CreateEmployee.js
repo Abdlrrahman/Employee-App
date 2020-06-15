@@ -73,11 +73,9 @@ export default function CreateEmployee({ navigation }) {
                 body: data,
             })
             response = await response.json()
-            console.log(response)
             setPicture(response.secure_url)
             setModal(false)
         } catch (error) {
-            console.log("handleUpload ", error)
             Alert.alert(error);
         }
     }
@@ -102,7 +100,6 @@ export default function CreateEmployee({ navigation }) {
             Alert.alert(`${response.name} is saved successfully`)
             navigation.navigate("Home")
         } catch (error) {
-            console.log("submitData ", error)
             Alert.alert(error)
         }
     }
