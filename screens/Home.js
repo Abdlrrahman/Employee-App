@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, Image, Alert, View, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, Image, Alert, View, FlatList } from 'react-native';
 import { Card, FAB } from 'react-native-paper';
 import env from "./variables";
 
@@ -8,14 +8,21 @@ import env from "./variables";
 export default function Home(props) {
     const [data, setData] = useState("")
     const [loading, setLoading] = useState(true)
-    useEffect(() => {
+
+    const fetchData = () => {
         fetch(env.apiUrl)
             .then(res => res.json())
             .then(data =>
                 setData(data),
                 setLoading(false)
-            ).catch(err => console.log(err))
+            ).catch(err =>
+                console.log(err),
+                Alert.alert(error)
+            )
+    }
 
+    useEffect(() => {
+        fetchData()
     }, [data])
 
     const renderList = ((item) => {
@@ -39,11 +46,7 @@ export default function Home(props) {
     })
     return (
         <View style={styles.root}>
-            {loading ?
-                <ActivityIndicator size="large" color="#006aff" />
-                :
-                <FlatList data={data} renderItem={({ item }) => { return renderList(item) }} keyExtractor={(item) => item._id} />
-            }
+            <FlatList data={data} renderItem={({ item }) => { return renderList(item) }} keyExtractor={(item) => item._id} onRefresh={() => fetchData()} refreshing={loading} />
             <FAB
                 style={styles.fab}
                 small={false}
