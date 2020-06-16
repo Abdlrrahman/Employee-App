@@ -129,7 +129,7 @@ export default function CreateEmployee({ navigation, route }) {
     const updateDetails = async () => {
         try {
             let response = await fetch(`${env.apiUrl}/update`, {
-                method: "POST",
+                method: "patch",
                 headers: {
                     'Content-Type': 'application/json'
                 },
