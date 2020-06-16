@@ -126,6 +126,32 @@ export default function CreateEmployee({ navigation, route }) {
         }
     }
 
+    const updateDetails = async () => {
+        try {
+            let response = await fetch(`${env.apiUrl}/update`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: route.params._id,
+                    name: Name,
+                    email: Email,
+                    phone: Phone,
+                    picture: Picture,
+                    salary: Salary,
+                    position: Position
+                })
+            })
+            response = await response.json()
+            console.log(response)
+            Alert.alert(`${response.name} has been updated`)
+            navigation.navigate("Home")
+        } catch (error) {
+            Alert.alert("something went wrong")
+        }
+    }
+
     return (
         <View style={styles.root}>
             <TextInput style={styles.inputStyle} label='Name' value={Name} mode="outlined" theme={theme} onChangeText={text => setName(text)} />
@@ -137,8 +163,8 @@ export default function CreateEmployee({ navigation, route }) {
                 Upload Image
             </Button>
             {route.params ?
-                <Button icon="content-save" theme={theme} onPress={() => submitData()}>
-                    update
+                <Button icon="content-save" theme={theme} onPress={() => updateDetails()}>
+                    update details
                 </Button>
                 :
                 <Button icon="content-save" theme={theme} onPress={() => submitData()}>
