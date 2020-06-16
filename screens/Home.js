@@ -6,7 +6,7 @@ import env from "./variables";
 
 
 export default function Home(props) {
-    const [data, setData] = useState("")
+    const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
 
     const fetchData = () => {

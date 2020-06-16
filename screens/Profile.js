@@ -69,7 +69,10 @@ export default function Profile(props) {
                 </View>
             </Card>
             <View style={{ flexDirection: "row", justifyContent: "space-around", padding: 15 }}>
-                <Button icon="account-edit" mode="contained" theme={theme} onPress={() => console.log('Pressed')}>
+                <Button icon="account-edit" mode="contained" theme={theme} onPress={() => {
+                    props.navigation.navigate("CreateEmployee",
+                        { _id, name, email, picture, phone, salary, position })
+                }}>
                     Edit
                 </Button>
                 <Button icon="delete" mode="contained" theme={theme} onPress={() => deleteEmploye()}>

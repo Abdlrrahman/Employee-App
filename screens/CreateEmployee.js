@@ -6,14 +6,34 @@ import * as ImagePicker from 'expo-image-picker';
 import env from "./variables"
 
 
-export default function CreateEmployee({ navigation }) {
+export default function CreateEmployee({ navigation, route }) {
 
-    const [Name, setName] = useState("")
-    const [Phone, setPhone] = useState("")
-    const [Email, setEmail] = useState("")
-    const [Salary, setSalary] = useState("")
-    const [Picture, setPicture] = useState("")
-    const [Position, setPosition] = useState("")
+    const getDetails = (type) => {
+        if (route.params) {
+            switch (type) {
+                case "name":
+                    return route.params.name;
+                case "phone":
+                    return route.params.phone;
+                case "email":
+                    return route.params.email;
+                case "salary":
+                    return route.params.salary;
+                case "picture":
+                    return route.params.picture;
+                case "position":
+                    return route.params.position;
+            }
+        }
+        return "";
+    }
+
+    const [Name, setName] = useState(getDetails("name"))
+    const [Phone, setPhone] = useState(getDetails("phone"))
+    const [Email, setEmail] = useState(getDetails("email"))
+    const [Salary, setSalary] = useState(getDetails("salary"))
+    const [Picture, setPicture] = useState(getDetails("picture"))
+    const [Position, setPosition] = useState(getDetails("position"))
     const [modal, setModal] = useState(false)
 
     const pickFromGallery = async () => {
