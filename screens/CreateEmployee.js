@@ -55,7 +55,7 @@ export default function CreateEmployee({ navigation, route }) {
                 handleUpload(newFile)
             }
         } else {
-            Alert.alert("Permission needed")
+            Alert.alert("Warning", "Permission needed")
         }
     }
 
@@ -77,7 +77,7 @@ export default function CreateEmployee({ navigation, route }) {
                 handleUpload(newFile)
             }
         } else {
-            Alert.alert("Permission needed")
+            Alert.alert("Warning", "Permission needed")
         }
     }
 
@@ -98,7 +98,7 @@ export default function CreateEmployee({ navigation, route }) {
             setPicture(response.secure_url)
             setModal(false)
         } catch (error) {
-            Alert.alert("something went wrong");
+            Alert.alert("Error", "something went wrong");
         }
     }
 
@@ -120,10 +120,10 @@ export default function CreateEmployee({ navigation, route }) {
             })
             response = await response.json()
             console.log(response)
-            Alert.alert(`${response.name} is saved successfully`)
+            Alert.alert('Success', `${response.name} is saved successfully`)
             navigation.navigate("Home")
         } catch (error) {
-            Alert.alert("something went wrong")
+            Alert.alert("Error", "something went wrong")
         }
     }
 
@@ -146,15 +146,15 @@ export default function CreateEmployee({ navigation, route }) {
             })
             response = await response.json()
             console.log(response)
-            Alert.alert(`${response.name} has been updated`)
+            Alert.alert('Success', `${response.name} has been updated`)
             navigation.navigate("Home")
         } catch (error) {
-            Alert.alert("something went wrong")
+            Alert.alert('Error:', err.message)
         }
     }
 
     return (
-        <KeyboardAvoidingView bahavior="position" style={styles.root} enabled={enableShift} >
+        <KeyboardAvoidingView behavior="position" style={styles.root} enabled={enableShift} >
             <View >
                 <TextInput style={styles.inputStyle} label='Name' value={Name} mode="outlined" onFocus={() => setEnableShift(false)} theme={theme} onChangeText={text => setName(text)} />
                 <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" onFocus={() => setEnableShift(false)} theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />

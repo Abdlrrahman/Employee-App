@@ -25,11 +25,11 @@ export default function Profile(props) {
             })
             response = await response.json()
             console.log(response)
-            Alert.alert(`${response.name} is saved successfully`)
+            Alert.alert('Success', `${response.name} has been deleted successfully`)
             props.navigation.navigate("Home")
         } catch (error) {
             console.log(error)
-            Alert.alert("something went wrong")
+            Alert.alert('Error', "something went wrong")
         }
     }
 
