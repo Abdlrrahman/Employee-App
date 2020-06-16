@@ -136,9 +136,15 @@ export default function CreateEmployee({ navigation, route }) {
             <Button style={styles.inputStyle} icon={Picture == "" ? "upload" : "check"} mode="contained" theme={theme} onPress={() => setModal(true)}>
                 Upload Image
             </Button>
-            <Button icon="content-save" theme={theme} onPress={() => submitData()}>
-                Save
-            </Button>
+            {route.params ?
+                <Button icon="content-save" theme={theme} onPress={() => submitData()}>
+                    update
+                </Button>
+                :
+                <Button icon="content-save" theme={theme} onPress={() => submitData()}>
+                    Save
+                </Button>
+            }
             <Modal animationType="slide" transparent={true} visible={modal}>
                 <View style={styles.modalView}>
                     <View style={styles.modalButtonView}>
