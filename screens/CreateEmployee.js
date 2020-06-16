@@ -156,9 +156,9 @@ export default function CreateEmployee({ navigation, route }) {
     return (
         <KeyboardAvoidingView bahavior="position" style={styles.root} enabled={enableShift} >
             <View >
-                <TextInput style={styles.inputStyle} label='Name' value={Name} mode="outlined" theme={theme} onChangeText={text => setName(text)} />
-                <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />
-                <TextInput style={styles.inputStyle} label='Email' value={Email} mode="outlined" theme={theme} onChangeText={text => setEmail(text)} />
+                <TextInput style={styles.inputStyle} label='Name' value={Name} mode="outlined" onFocus={() => setEnableShift(false)} theme={theme} onChangeText={text => setName(text)} />
+                <TextInput style={styles.inputStyle} label='Phone' value={Phone} mode="outlined" onFocus={() => setEnableShift(false)} theme={theme} keyboardType="number-pad" onChangeText={text => setPhone(text)} />
+                <TextInput style={styles.inputStyle} label='Email' value={Email} mode="outlined" onFocus={() => setEnableShift(false)} theme={theme} onChangeText={text => setEmail(text)} />
                 <TextInput style={styles.inputStyle} label='Salary' value={Salary} mode="outlined" onFocus={() => setEnableShift(true)} theme={theme} onChangeText={text => setSalary(text)} />
                 <TextInput style={styles.inputStyle} label='Position' value={Position} mode="outlined" onFocus={() => setEnableShift(true)} theme={theme} onChangeText={text => setPosition(text)} />
                 <Button style={styles.inputStyle} icon={Picture == "" ? "upload" : "check"} mode="contained" theme={theme} onPress={() => setModal(true)}>
