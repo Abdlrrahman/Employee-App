@@ -4,7 +4,6 @@ import { Card, FAB } from 'react-native-paper';
 import env from "./variables";
 
 
-
 export default function Home(props) {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
