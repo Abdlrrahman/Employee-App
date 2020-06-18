@@ -40,6 +40,7 @@ export default function Profile(props) {
             Linking.openURL(`telprompt: ${phone}`)
         }
     }
+
     return (
         <View style={styles.root}>
             <LinearGradient colors={["#006aff", "#e0e0e0"]} style={{ height: "20%" }} />

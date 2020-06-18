@@ -42,6 +42,7 @@ export default function Home(props) {
             </Card>
         )
     })
+
     return (
         <View style={styles.root}>
             <FlatList data={data} renderItem={({ item }) => { return renderList(item) }} keyExtractor={(item) => item._id} onRefresh={() => fetchData()} refreshing={loading} />
