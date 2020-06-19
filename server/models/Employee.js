@@ -7,6 +7,6 @@ const EmployeeSchema = new mongoose.Schema({
     picture: String,
     salary: String,
     position: String
-})
+}, { timestamps: true });
 
 mongoose.model("employee", EmployeeSchema)
