@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, Image, Alert, View, FlatList } from 'react-native';
 import { Card, FAB } from 'react-native-paper';
 import env from "./variables";
@@ -6,9 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 export default function Home(props) {
-
-    // const [data, setData] = useState([])
-    // const [loading, setLoading] = useState(true)
 
     const dispatch = useDispatch()
 
@@ -20,8 +17,6 @@ export default function Home(props) {
         fetch(env.apiUrl)
             .then(res => res.json())
             .then(data =>
-                // setData(data),
-                // setLoading(false)
                 dispatch({ type: "ADD_DATA", payload: data }),
                 dispatch({ type: "SET_LOADING", payload: false })
             ).catch(err =>
