@@ -2,18 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, Image, Alert, View, FlatList } from 'react-native';
 import { Card, FAB } from 'react-native-paper';
 import env from "./variables";
+import { useSelector, useDispatch } from 'react-redux';
 
 
 export default function Home(props) {
-    const [data, setData] = useState([])
-    const [loading, setLoading] = useState(true)
+
+    // const [data, setData] = useState([])
+    // const [loading, setLoading] = useState(true)
+
+    const dispatch = useDispatch()
+
+    const { data, loading } = useSelector((state) => {
+        return state
+    })
 
     const fetchData = () => {
         fetch(env.apiUrl)
             .then(res => res.json())
             .then(data =>
-                setData(data),
-                setLoading(false)
+                // setData(data),
+                // setLoading(false)
+                dispatch({ type: "ADD_DATA", payload: data }),
+                dispatch({ type: "SET_LOADING", payload: false })
             ).catch(err =>
                 Alert.alert('Error:', err.message)
             )

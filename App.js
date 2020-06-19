@@ -18,15 +18,17 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} options={myOptions} />
-          <Stack.Screen name="CreateEmployee" component={CreateEmployee} options={{ ...myOptions, title: "Create Employee" }} />
-          <Stack.Screen name="Profile" component={Profile} options={myOptions} />
-        </Stack.Navigator>
-      </View>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <View style={styles.container}>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} options={myOptions} />
+            <Stack.Screen name="CreateEmployee" component={CreateEmployee} options={{ ...myOptions, title: "Create Employee" }} />
+            <Stack.Screen name="Profile" component={Profile} options={myOptions} />
+          </Stack.Navigator>
+        </View>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
