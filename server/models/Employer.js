@@ -1,11 +1,40 @@
 const mongoose = require('mongoose');
 
 const EmployerSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-    image: String,
-    hash: String,
-    salt: String
+    first_name: {
+        String,
+        required: true,
+        min: 6,
+        max: 255
+    },
+    last_name: {
+        String,
+        required: true,
+        min: 6,
+        max: 255
+    },
+    email: {
+        String,
+        required: true,
+        min: 6,
+        max: 255
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    password: {
+        String,
+        required: true,
+        min: 8,
+        max: 1024
+    },
+    company: {
+        String,
+        required: true,
+        min: 2,
+        max: 255
+    },
 }, { timestamps: true });
 
 mongoose.model('employer', EmployerSchema);

@@ -34,6 +34,11 @@ mongoose.connection.on("error", (error) => {
 /////////////////////////////////////////////////////
 
 
+
+
+/////////////////////////////////////////////////////
+
+
 app.get('/', async (req, res) => {
     try {
         let response = await Employee.find({})
