@@ -19,7 +19,7 @@ const EmployerSchema = new mongoose.Schema({
         min: 6,
         max: 255
     },
-    image: {
+    picture: {
         type: String,
         required: true
     },

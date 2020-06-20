@@ -3,7 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const port = 3000;
-require('./models/Employee');
+require('./model/Employee');
+require('./model/Employer');
 
 app.use(bodyParser.json())
 
@@ -11,6 +12,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Employee = mongoose.model("employee");
+const Employer = mongoose.model("employer");
 
 const mongodb = `mongodb+srv://Abdo:${process.env.DB_PASSWORD}@cluster0-u4hb7.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
@@ -34,6 +36,26 @@ mongoose.connection.on("error", (error) => {
 /////////////////////////////////////////////////////
 
 
+app.post('/register', async (req, res) => {
+    try {
+        console.log(req.body.picture)
+        const employer = new Employer({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            password: req.body.password,
+            picture: req.body.picture,
+            company: req.body.company
+        })
+        let response = await employer.save()
+        console.log(response);
+        res.send(response)
+        // res.send('sent successfully');
+    } catch (error) {
+        console.log(error);
+    }
+
+});
 
 
 /////////////////////////////////////////////////////
