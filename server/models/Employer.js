@@ -2,19 +2,19 @@ const mongoose = require('mongoose');
 
 const EmployerSchema = new mongoose.Schema({
     first_name: {
-        String,
+        type: String,
         required: true,
         min: 6,
         max: 255
     },
     last_name: {
-        String,
+        type: String,
         required: true,
         min: 6,
         max: 255
     },
     email: {
-        String,
+        type: String,
         required: true,
         min: 6,
         max: 255
@@ -24,13 +24,13 @@ const EmployerSchema = new mongoose.Schema({
         required: true
     },
     password: {
-        String,
+        type: String,
         required: true,
         min: 8,
         max: 1024
     },
     company: {
-        String,
+        type: String,
         required: true,
         min: 2,
         max: 255
