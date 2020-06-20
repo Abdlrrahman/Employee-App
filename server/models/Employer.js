@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+const EmployerSchema = new mongoose.Schema({
     username: String,
     email: String,
     image: String,
@@ -8,4 +8,4 @@ const UserSchema = new mongoose.Schema({
     salt: String
 }, { timestamps: true });
 
-mongoose.model('User', UserSchema);
+mongoose.model('Employer', EmployerSchema);
