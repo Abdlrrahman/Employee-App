@@ -6,7 +6,10 @@ const EmployeeSchema = new mongoose.Schema({
     phone: String,
     picture: String,
     salary: String,
-    position: String
+    position: String,
+    Employer: [
+        { type: Schema.Types.ObjectId, ref: 'employer' }
+    ]
 }, { timestamps: true });
 
 mongoose.model("employee", EmployeeSchema)

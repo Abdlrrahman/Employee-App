@@ -8,4 +8,4 @@ const EmployerSchema = new mongoose.Schema({
     salt: String
 }, { timestamps: true });
 
-mongoose.model('Employer', EmployerSchema);
+mongoose.model('employer', EmployerSchema);
