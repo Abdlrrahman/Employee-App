@@ -31,7 +31,7 @@ router.post('/register', async (req, res) => {
     try {
         let response = await employer.save()
         console.log(response);
-        res.send(response)
+        res.send({ user: user._id })
         // res.send('sent successfully');
     } catch (error) {
         console.log(error);
