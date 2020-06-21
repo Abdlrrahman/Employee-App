@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 require('../models/Employer');
 const Employer = mongoose.model("employer");
 const { registerValidation } = require("../services/validation");
+const bcrypt = require("bcryptjs")
 
 
 router.post('/register', async (req, res) => {
@@ -14,12 +15,15 @@ router.post('/register', async (req, res) => {
 
     if (emailExist) return res.status(400).send("Email already exists");
 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt)
+
     console.log(req.body)
     const employer = new Employer({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
-        password: req.body.password,
+        password: hashedPassword,
         picture: req.body.picture,
         company: req.body.company
     })
