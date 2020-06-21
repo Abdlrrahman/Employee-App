@@ -2,7 +2,7 @@ const router = require("express").Router();
 const mongoose = require('mongoose');
 require('../models/Employer');
 const Employer = mongoose.model("employer");
-const { registerValidation } = require("../services/validation");
+const { registerValidation, loginValidation } = require("../services/validation");
 const bcrypt = require("bcryptjs")
 
 
