@@ -55,7 +55,9 @@ router.post('/login', async (req, res) => {
 
         const token = jwt.sign({ _id: employer._id }, process.env.TOKEN_SECRET)
 
-        res.send('logged in');
+        res.header("auth-token", token).send(token)
+
+        // res.send('logged in');
         // console.log(req.body);
     } catch (error) {
         console.log(error);
