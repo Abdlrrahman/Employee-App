@@ -39,4 +39,24 @@ router.post('/register', async (req, res) => {
 
 });
 
+router.post('/login', async (req, res) => {
+    try {
+        const { error } = loginValidation(req.body);
+
+        if (error) return res.status(400).send(error.details[0].message);
+
+        const employer = await Employer.findOne({ email: req.body.email });
+
+        if (!employer) return res.status(400).send("Email or password is wrong");
+
+        const validPassword = await bcrypt.compare(req.body.password, employer.password)
+        if (!validPassword) return res.status(400).send("Invalid password");
+
+        res.send('logged in');
+        console.log(req.body);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 module.exports = router;
