@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 require('../models/Employer');
 const Employer = mongoose.model("employer");
 const { registerValidation, loginValidation } = require("../services/validation");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 
 
 router.post('/register', async (req, res) => {
@@ -52,8 +53,10 @@ router.post('/login', async (req, res) => {
         const validPassword = await bcrypt.compare(req.body.password, employer.password)
         if (!validPassword) return res.status(400).send("Invalid password");
 
+        const token = jwt.sign({ _id: employer._id }, process.env.TOKEN_SECRET)
+
         res.send('logged in');
-        console.log(req.body);
+        // console.log(req.body);
     } catch (error) {
         console.log(error);
     }
