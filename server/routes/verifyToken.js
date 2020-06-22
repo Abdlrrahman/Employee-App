@@ -13,3 +13,5 @@ const auth = async (req, res, next) => {
         res.status(400).send("Invalid Token");
     }
 }
+
+module.exports = auth;
