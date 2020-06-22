@@ -4,7 +4,8 @@ require('../models/Employer');
 const Employer = mongoose.model("employer");
 const { registerValidation, loginValidation } = require("../services/validation");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const generateAccessToken = require("../services/generateAccessToken");
 
 
 router.post('/register', async (req, res) => {
@@ -53,7 +54,7 @@ router.post('/login', async (req, res) => {
         const validPassword = await bcrypt.compare(req.body.password, employer.password)
         if (!validPassword) return res.status(400).send("Invalid password");
 
-        const token = jwt.sign({ _id: employer._id }, process.env.TOKEN_SECRET)
+        const token = generateAccessToken(employer._id);
 
         res.header("auth-token", token).send(token)
 

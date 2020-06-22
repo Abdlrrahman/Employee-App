@@ -2,7 +2,7 @@ const router = require("express").Router();
 const mongoose = require('mongoose');
 require('../models/Employee');
 const Employee = mongoose.model("employee");
-const verify = require('./verifyToken');
+const verify = require('../services/verifyToken');
 
 
 
