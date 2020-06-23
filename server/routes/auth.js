@@ -57,8 +57,8 @@ router.post('/login', async (req, res) => {
         const token = generateAccessToken(employer._id);
         const refreshToken = generateRefreshToken(employer._id);
 
-        res.header("refresh-token", refreshToken).send(refreshToken)
-        res.header("auth-token", token).send(token)
+        // res.header("refresh-token", refreshToken).send(refreshToken)
+        res.header("auth-token", token, "refresh-token", refreshToken).send(token, refreshToken)
 
         // res.send('logged in');
         // console.log(req.body);
