@@ -6,6 +6,7 @@ const { registerValidation, loginValidation } = require("../services/validation"
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const generateAccessToken = require("../services/generateAccessToken");
+const destroyRefreshToken = require("../services/destroyRefreshToken");
 
 
 router.post('/register', async (req, res) => {
@@ -50,6 +51,7 @@ router.post('/login', async (req, res) => {
         const employer = await Employer.findOne({ email: req.body.email });
 
         if (!employer) return res.status(400).send("Email or password is wrong");
+        console.log(employer)
 
         const validPassword = await bcrypt.compare(req.body.password, employer.password)
         if (!validPassword) return res.status(400).send("Invalid password");
@@ -58,10 +60,22 @@ router.post('/login', async (req, res) => {
         const refreshToken = generateRefreshToken(employer._id);
 
         // res.header("refresh-token", refreshToken).send(refreshToken)
-        res.header("auth-token", token, "refresh-token", refreshToken).send(token, refreshToken)
+        res.header(("auth-token", token), ("refresh-token", refreshToken)).send(token, refreshToken)
 
         // res.send('logged in');
         // console.log(req.body);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.delete('/logout', async (req, res) => {
+    try {
+        const employer = await Employer.findOne({ email: req.body.email });
+
+        await destroyRefreshToken(employer._id)
+
+        res.status(204)
     } catch (error) {
         console.log(error);
     }
